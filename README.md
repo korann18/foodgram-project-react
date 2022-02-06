@@ -61,4 +61,13 @@ docker-compose exec web python manage.py createsuperuser
 
 http://51.250.7.243/api/docs/
 
+Логин от админки:
+```
+wkorann@gmail.com
+```
+Пароль:
+```
+admin
+```
+
 Автор проекта: Анна Корниенкова
