@@ -1,21 +1,22 @@
-from django.http import HttpResponse
-from django_filters.rest_framework import DjangoFilterBackend
-from django.shortcuts import get_object_or_404
 from django.db.models import Sum
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+from django_filters.rest_framework import DjangoFilterBackend
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
-from rest_framework.decorators import action
-from rest_framework import status
-from rest_framework.response import Response
 from reportlab.pdfgen.canvas import Canvas
-from recipes.pagination import CustomPaginator
-from recipes.permissions import IsAuthorOrReadOnly
+from rest_framework import status
+from rest_framework.decorators import action
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
+
+from recipes.filters import IngredientFilter, RecipeFilter
 from recipes.models import (Favorite, Ingredient, IngredientAmount, Recipe,
                             ShoppingCart, Tag)
-from recipes.filters import IngredientFilter, RecipeFilter
+from recipes.pagination import CustomPaginator
+from recipes.permissions import IsAuthorOrReadOnly
 from recipes.serializers import (FavoriteSerializer, IngredientSerializer,
                                  RecipeListSerializer, RecipeSerializer,
                                  ShoppingCartSerializer, TagSerializer)
