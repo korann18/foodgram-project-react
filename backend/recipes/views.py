@@ -14,12 +14,12 @@ from reportlab.pdfgen.canvas import Canvas
 
 from recipes.pagination import CustomPaginator
 from recipes.permissions import IsAuthorOrReadOnly
-from recipes.models import (Tag, Ingredient, Recipe, Favorite, ShoppingCart,
-                            IngredientAmount)
+from recipes.models import (Favorite, Ingredient, IngredientAmount, Recipe,
+                            ShoppingCart, Tag)
 from recipes.filters import IngredientFilter, RecipeFilter
-from recipes.serializers import (TagSerializer, IngredientSerializer,
-                                 RecipeSerializer, RecipeListSerializer,
-                                 FavoriteSerializer, ShoppingCartSerializer)
+from recipes.serializers import (FavoriteSerializer, IngredientSerializer,
+                                 RecipeListSerializer, RecipeSerializer,
+                                 ShoppingCartSerializer, TagSerializer)
 
 
 class TagsViewSet(ReadOnlyModelViewSet):
@@ -48,10 +48,12 @@ class RecipeViewSet(ModelViewSet):
             return RecipeListSerializer
         return RecipeSerializer
 
-    @action(detail=True, permission_classes=[IsAuthenticated], methods=['POST'])
+    @action(detail=True, permission_classes=[IsAuthenticated],
+            methods=['POST'])
     def favorite(self, request, pk):
         data = {'user': request.user.id, 'recipe': pk}
-        serializer = FavoriteSerializer(data=data, context={'request': request})
+        serializer = FavoriteSerializer(data=data,
+                                        context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -63,7 +65,8 @@ class RecipeViewSet(ModelViewSet):
             recipe=get_object_or_404(Recipe, id=pk)).delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    @action(detail=True, permission_classes=[IsAuthenticated], methods=['POST'])
+    @action(detail=True, permission_classes=[IsAuthenticated],
+            methods=['POST'])
     def shopping_cart(self, request, pk):
         data = {'user': request.user.id, 'recipe': pk}
         serializer = ShoppingCartSerializer(data=data,
@@ -87,7 +90,7 @@ class RecipeViewSet(ModelViewSet):
         response['Content-Disposition'] = (
             'attachment; filename="shopping_cart.pdf"')
         canvas = Canvas(response, pagesize=A4)
-        pdfmetrics.registerFont(TTFont('FreeSans', 'data/FreeSans.ttf'))
+        pdfmetrics.registerFont(TTFont('FreeSans', '../../data/FreeSans.ttf'))
         canvas.setFont('FreeSans', 25)
         canvas.setTitle('СПИСОК ПОКУПОК')
         canvas.drawString(begin_position_x,
