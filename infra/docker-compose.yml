@@ -20,7 +20,7 @@ services:
       - ./.env
 
   frontend:
-    build: # если надо собрать в локале
+    build:
       context: ../frontend
       dockerfile: Dockerfile
     image: anyapracticum/foodgram_frontend
