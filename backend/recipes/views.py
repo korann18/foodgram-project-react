@@ -90,7 +90,7 @@ class RecipeViewSet(ModelViewSet):
         response['Content-Disposition'] = (
             'attachment; filename="shopping_cart.pdf"')
         canvas = Canvas(response, pagesize=A4)
-        pdfmetrics.registerFont(TTFont('FreeSans', '../../data/FreeSans.ttf'))
+        pdfmetrics.registerFont(TTFont('FreeSans', 'data/FreeSans.ttf'))
         canvas.setFont('FreeSans', 25)
         canvas.setTitle('СПИСОК ПОКУПОК')
         canvas.drawString(begin_position_x,
