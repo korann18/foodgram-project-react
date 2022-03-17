@@ -1,8 +1,6 @@
-# praktikum_new_diplom
+# diplom
 ***
 ![foodgram-workflow](https://github.com/korann18/foodgram-project-react/workflows/foodgram-workflow/badge.svg)
-***
-## Дипломный проект курса Python-разработчик Яндекс-Практикум
 ***
 ### Описание:
 С помощью сервиса Foodgram - продуктовый помощник, пользователи смогут публиковать рецепты, 
@@ -12,7 +10,7 @@
 ***
 ### Проект доступен по ссылке:
 
-http://51.250.7.243/
+http://anykornienkova.ru/
 
 ### Стек технологий
 ```
@@ -59,7 +57,7 @@ docker-compose exec web python manage.py createsuperuser
 
 Документация доступна по адресу:
 
-http://51.250.7.243/api/docs/
+http://84.201.175.57/api/docs/
 
 Логин от админки:
 ```
